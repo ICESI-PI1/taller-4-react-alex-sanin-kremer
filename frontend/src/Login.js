@@ -2,20 +2,55 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import axios from "axios";
+
+const baseURL = "http://localhost:8080/login";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [login, setLogin] = useState(null);
+  const [auth, setAuth] = useState(null);
   const navigate = useNavigate();
+
+//get login (use for info)
+React.useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setLogin(response.data);
+    });
+  }, []);
+
+if (!login) return null;
+
+React.useEffect(() => {
+  axios.get(`${baseURL}/auth`).then((response) => {
+    setAuth(response.data);
+  });
+}, []);
 
 const handleLogin = () => {
   // Implement your authentication logic here
   // For this example, we'll simulate a successful login and set the user object.
-  const user = { displayName: 'username' };
+  //const user = { displayName: 'username' };
+  axios
+      .post(baseURL, {
+        username: username,
+        password: password
+      })
+      .then((response) => {
+        setAuth(response.data);
+      });
 
-  // Redirect to the main page after successful login
-  navigate('/main', { state: user });
+  if (!auth) {
+    return "login failed!"
+  }else{
+    // Redirect to the main page after successful login
+    navigate('/main', { state: user });
+  }
+
 };
+
+
 
   return (
     <div className="container">
