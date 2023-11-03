@@ -8,7 +8,7 @@ import BookTable from './BookTable';
 function Books() {
   // Replace this with actual book data or fetching logic
   const [books, setBooks] = React.useState(null);
-  const [bookEdit, setBookEdit] = useState({id:"", title:"", date:"", author:""});
+  //const [bookEdit, setBookEdit] = useState({id:"", title:"", date:"", author:""});
   /*
   const books = [
     { id: 1, title: 'Book 1', author: 'Author 1' },
@@ -25,7 +25,7 @@ function Books() {
     }
   }
 
-  useEffect( () => {getBooks()}, [])
+  //useEffect( () => {getBooks()}, [])
 
   const addBook = async (book) => {
     //Try to edit if book already exists if not, add new book
@@ -57,7 +57,8 @@ function Books() {
       }
     }
 
-
+    const bookEdit = null;
+    const setBookEdit = null;
 
   return (
     <div className="container mt-5">

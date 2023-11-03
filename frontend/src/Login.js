@@ -1,10 +1,10 @@
-// Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from "axios";
 
-const baseURL = "http://localhost:8080/login";
+const baseURL = "http://localhost:8080/login/auth";
+const user = null;
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -13,40 +13,84 @@ function Login() {
   const [auth, setAuth] = useState(null);
   const navigate = useNavigate();
 
-//get login (use for info)
-React.useEffect(() => {
+/*React.useEffect(() => {
     axios.get(baseURL).then((response) => {
       setLogin(response.data);
     });
   }, []);
 
 if (!login) return null;
-
-React.useEffect(() => {
+*/
+/*React.useEffect(() => {
   axios.get(`${baseURL}/auth`).then((response) => {
     setAuth(response.data);
   });
-}, []);
+}, []);*/
 
-const handleLogin = () => {
+const handleLogin = async () => {
   // Implement your authentication logic here
   // For this example, we'll simulate a successful login and set the user object.
   //const user = { displayName: 'username' };
+
   axios
       .post(baseURL, {
-        username: username,
+        email: username,
         password: password
+      },{
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+          'Authorization' : 'Bearer ' + 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMTIzQGdtYWlsLmNvbSIsImV4cCI6MTcwMTU1NzcyNiwibmFtZSI6InVzZXIxMjMiLCJlbWFpbCI6InVzZXIxMjNAZ21haWwuY29tIn0.QvYJfmIv_n4jTE1QBwYnyShfCy_IlOuSWou-S4z_jccLKV8YI1fFtBItOkQvk9FcB9Xj8BPSyFMvKxzrNoLSmA'
+        }
       })
       .then((response) => {
-        setAuth(response.data);
+        console.log(response);
+        setAuth(response.data.Authorization);
+        console.log('----------------------------------------------------')
+        console.log(auth)
+        console.log('----------------------------------------------------')
+      }).catch(function (error) {
+        console.log(error);
       });
 
   if (!auth) {
+    console.log('No authentication')
     return "login failed!"
   }else{
     // Redirect to the main page after successful login
     navigate('/main', { state: user });
+    console.log('authenticated')
   }
+
+  /*try {
+    const response = await axios.post(baseURL, {
+      email: username,
+      password: password
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+      }
+    });
+
+    console.log(response);
+    setAuth(response.Authorization);
+    console.log('----------------------------------------------------')
+    console.log(auth)
+    console.log('----------------------------------------------------')
+    if (!auth) {
+      console.log('No authentication');
+      return "login failed!";
+    } else {
+      // Redirect to the main page after successful login
+      console.log('authenticated');
+      navigate('/main', { state: user });
+    }
+  } catch (error) {
+    console.log(error);
+  }*/
 
 };
 

@@ -30,10 +30,10 @@ function BookForm({addBook, bookEdit}) {
       noValidate
       autoComplete="off"
     >
-      <TextField label="Book Id" variant="standard" value={userId} onChange={(e)=>{setId(e.target.value)}}/>
+      <TextField label="Book Id" variant="standard" value={id} onChange={(e)=>{setId(e.target.value)}}/>
       <TextField label="Title" variant="standard" value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
-      <TextField label="Date" variant="standard" value={title} onChange={(e)=>{setDate(e.target.value)}}/>
-      <TextField label="Author" variant="standard" value={title} onChange={(e)=>{setAuthor(e.target.value)}}/>
+      <TextField label="Date" variant="standard" value={date} onChange={(e)=>{setDate(e.target.value)}}/>
+      <TextField label="Author" variant="standard" value={author} onChange={(e)=>{setAuthor(e.target.value)}}/>
       <Button variant="contained" onClick={handleClick}>Save</Button>
     </Box>
   )
