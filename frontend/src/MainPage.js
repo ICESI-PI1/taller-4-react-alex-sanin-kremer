@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+//let { state } = useLocation();
+
 function MainPage({ user }) {
   return (
     <div className="main-page">

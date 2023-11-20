@@ -1,10 +1,17 @@
 import { TableContainer, TableRow, TableHead, Table,  TableCell, TableBody, Paper } from '@mui/material'
 import PropTypes from 'prop-types'
 import BookRow from './BookRow'
+import { useLocation } from 'react-router-dom';
+
+
 
 function  BookTable ({books, delBook, editBook}) {
 
+  let { state } = useLocation();
+
   const  renderBooks = () => {
+    console.log(delBook)
+    console.log(editBook)
     return  books.map((book)=>
 
          (<BookRow key={book.id} book={book} delbook={delBook} editBook={editBook}/>)

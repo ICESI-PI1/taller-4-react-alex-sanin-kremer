@@ -1,24 +1,25 @@
 import React from 'react';
-import axios from "axios";
+import axios from './config/axios';
 import BookForm from './BookForm';
 import BookTable from './BookTable';
+import { useEffect, useLayoutEffect } from 'react';
 
-
+const baseURL = 'http://localhost:8080/books'
 
 function Books() {
-  // Replace this with actual book data or fetching logic
-  const [books, setBooks] = React.useState(null);
-  //const [bookEdit, setBookEdit] = useState({id:"", title:"", date:"", author:""});
-  /*
-  const books = [
-    { id: 1, title: 'Book 1', author: 'Author 1' },
-    { id: 2, title: 'Book 2', author: 'Author 2' },
-    { id: 3, title: 'Book 3', author: 'Author 3' },
-  ];*/
+  
+  const [books, setBooks] = React.useState([]);
+  const [bookEdit, setBookEdit] = React.useState({id:"", title:"", date:"", author:""});
+
+  useLayoutEffect(() => {
+    getBooks()
+    delBook()
+    addBook()
+  }, []);
 
   const getBooks = async () => {
     try {
-      const res = await axios.get("/books")
+      const res = await axios.get('/books')
       setBooks(res.data)
     }catch(e){
       console.log(e)
@@ -56,9 +57,6 @@ function Books() {
         console.log(e)
       }
     }
-
-    const bookEdit = null;
-    const setBookEdit = null;
 
   return (
     <div className="container mt-5">
