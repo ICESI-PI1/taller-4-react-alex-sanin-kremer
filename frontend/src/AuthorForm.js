@@ -28,9 +28,9 @@ function AuthorForm({addAuthor, authorEdit}) {
       noValidate
       autoComplete="off"
     >
-      <TextField label="Author Id" variant="standard" value={userId} onChange={(e)=>{setId(e.target.value)}}/>
-      <TextField label="Name" variant="standard" value={title} onChange={(e)=>{setName(e.target.value)}}/>
-      <TextField label="Nationality" variant="standard" value={title} onChange={(e)=>{setNationality(e.target.value)}}/>
+      <TextField label="Author Id" variant="standard" value={id} onChange={(e)=>{setId(e.target.value)}}/>
+      <TextField label="Name" variant="standard" value={name} onChange={(e)=>{setName(e.target.value)}}/>
+      <TextField label="Nationality" variant="standard" value={nationality} onChange={(e)=>{setNationality(e.target.value)}}/>
       <Button variant="contained" onClick={handleClick}>Save</Button>
     </Box>
   )

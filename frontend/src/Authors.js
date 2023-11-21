@@ -1,34 +1,72 @@
 import React from 'react';
+import axios from './config/axios';
+import AuthorForm from './AuthorForm';
+import AuthorTable from './AuthorTable';
+import { useEffect, useLayoutEffect } from 'react';
+
 
 function Authors() {
-  // Replace this with actual author data or fetching logic
-  const authors = [
-    { id: 1, name: 'Author 1', country: 'Country 1' },
-    { id: 2, name: 'Author 2', country: 'Country 2' },
-    { id: 3, name: 'Author 3', country: 'Country 3' },
-  ];
+
+  const [authors, setAuthors] = React.useState([]);
+  const [authorEdit, setAuthorEdit] = React.useState({id:"", name:"", nationality:""});
+
+  useLayoutEffect(() => {
+    getAuthors()
+    //delAuthor()
+    //addAuthor()
+  }, []);
+
+  const getAuthors = async () => {
+    try {
+      const res = await axios.get('/authors')
+      console.log("hola")
+      setAuthors(res.data)
+    }catch(e){
+      console.log(e)
+    }
+  }
+
+  //useEffect( () => {getAuthors()}, [])
+
+  const addAuthor = async (author) => {
+    //Try to edit if author already exists if not, add new author
+
+    
+          try{
+            const res = await axios.put("/authors/"+author.id, author)
+            if(res.status==200){
+              getAuthors()
+            }else{
+              try{
+                const res = await axios.post("/authors", author)
+                if(res.status==201)
+                  getAuthors()
+              }catch (e){
+                console.log(e)
+              }
+            }
+          }catch (e){
+            console.log(e)
+          }
+      }
+
+  const delAuthor = async (id) => {
+      try {
+        const res = await axios.delete("/authors/"+id)
+        if(res.status==200)
+          getAuthors()
+      }catch (e){
+        console.log(e)
+      }
+    }
 
   return (
     <div className="container mt-5">
+       <div>
+      <AuthorForm addAuthor={addAuthor} authorEdit={authorEdit}/>
+      </div>
       <h1 className="mb-4">Authors</h1>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Country</th>
-          </tr>
-        </thead>
-        <tbody>
-          {authors.map((author) => (
-            <tr key={author.id}>
-              <th scope="row">{author.id}</th>
-              <td>{author.name}</td>
-              <td>{author.country}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <AuthorTable authors={authors} delAuthor={delAuthor} editAuthor={setAuthorEdit}/>
     </div>
   );
 }

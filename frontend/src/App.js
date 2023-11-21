@@ -6,6 +6,9 @@ import Books from './Books';
 import Auth from './Authors';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Authors from './Authors';
+import ViewBookDetails from './ViewBookDetails';
+import ViewAuthorDetails from './ViewAuthorDetails';
+import ViewAuthorBooks from './ViewAuthorBooks';
 
 function App() {
   return (
@@ -15,6 +18,21 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/books" element={<Books />} />
         <Route path="/authors" element={<Authors />} />
+        <Route
+              exact
+              path="/books/:id"
+              component={ViewBookDetails}
+            />
+        <Route
+              exact
+              path="/authors/:id"
+              component={ViewAuthorDetails}
+            />
+        <Route
+              exact
+              path="/authors/:id/books"
+              component={ViewAuthorBooks}
+            />
       </Routes>
     </Router>
   );

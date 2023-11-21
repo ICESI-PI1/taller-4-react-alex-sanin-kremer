@@ -1,20 +1,18 @@
 import { TableContainer, TableRow, TableHead, Table,  TableCell, TableBody, Paper } from '@mui/material'
 import PropTypes from 'prop-types'
-import BookRow from './BookRow'
+import AuthorBookRow from './AuthorBookRow'
 import { useLocation } from 'react-router-dom';
 
 
 
-function  BookTable ({books, delBook, editBook}) {
+function  AuthorBookTable ({books}) {
 
   let { state } = useLocation();
 
   const  renderBooks = () => {
-    //console.log(delBook)
-    //console.log(editBook)
     return  books.map((book)=>
 
-         (<BookRow key={book.id} book={book} delbook={delBook} editBook={editBook}/>)
+         (<AuthorBookRow key={book.id} book={book}/>)
     )
   }
   return (
@@ -25,9 +23,6 @@ function  BookTable ({books, delBook, editBook}) {
           <TableCell>Book Id</TableCell>
           <TableCell align="right">Title</TableCell>
           <TableCell align="left">Publication Date</TableCell>
-          <TableCell align="left">Author Id</TableCell>
-          <TableCell align="left">Actions</TableCell>
-
         </TableRow>
       </TableHead>
       <TableBody>
@@ -39,10 +34,8 @@ function  BookTable ({books, delBook, editBook}) {
 }
 
 
-BookTable.propTypes = {
+AuthorBookTable.propTypes = {
   bookList: PropTypes.array,
-  delBook: PropTypes.func,
-  editBook: PropTypes.func
 }
 
-export default BookTable
+export default AuthorBookTable

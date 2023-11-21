@@ -18,6 +18,7 @@ function BookForm({addBook, bookEdit}) {
 
     const handleClick = ()=>{
         //e.preventDefault()
+        console.log(bookEdit);
         addBook({id,title, date, author})
     }
 
