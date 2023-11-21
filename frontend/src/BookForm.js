@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import { Box, Button, TextField, FormControlLabel, Checkbox } from '@mui/material'
 
 function BookForm({addBook, bookEdit}) {
-    const [id, setId] =  useState('')
     const [title, setTitle] =  useState('')
     const [date , setDate] =  useState('')
     const [author, setAuthor] =  useState('')
 
     useEffect(()=>{
-      setId(bookEdit.id)
+
       setTitle(bookEdit.title)
       setDate(bookEdit.date)
       setAuthor(bookEdit.author)
@@ -19,7 +18,7 @@ function BookForm({addBook, bookEdit}) {
     const handleClick = ()=>{
         //e.preventDefault()
         console.log(bookEdit);
-        addBook({id,title, date, author})
+        addBook({date,title, author})
     }
 
     return (
@@ -31,7 +30,6 @@ function BookForm({addBook, bookEdit}) {
       noValidate
       autoComplete="off"
     >
-      <TextField label="Book Id" variant="standard" value={id} onChange={(e)=>{setId(e.target.value)}}/>
       <TextField label="Title" variant="standard" value={title} onChange={(e)=>{setTitle(e.target.value)}}/>
       <TextField label="Date" variant="standard" value={date} onChange={(e)=>{setDate(e.target.value)}}/>
       <TextField label="Author" variant="standard" value={author} onChange={(e)=>{setAuthor(e.target.value)}}/>

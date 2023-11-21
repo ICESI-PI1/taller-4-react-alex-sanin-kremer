@@ -2,18 +2,15 @@ import PropTypes from 'prop-types'
 import { TableRow, TableCell, Button, } from '@mui/material'
 import { Link } from 'react-router-dom';
 
-function BookRow({book, delBook, editBook }) {
+function BookRow({book, delbook, editBook }) {
   const  handleDelete = () =>  {
-    delBook(book.id)
+    delbook(book.id)
   }
   return (
     <TableRow
           key={book.id}
           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
-          <TableCell component="th" scope="row">
-            {book.userId}
-          </TableCell>
           <TableCell align="right">{book.id}</TableCell>
           <TableCell align="left">{book.title}</TableCell>
           <TableCell align="left">{book.date}</TableCell>
