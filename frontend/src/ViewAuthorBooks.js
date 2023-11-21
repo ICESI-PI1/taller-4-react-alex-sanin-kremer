@@ -8,8 +8,8 @@ import { useLocation, Link } from "react-router-dom";
 function Books() {
     const [books, setBooks] = React.useState([]);
     const { state } = useLocation();
-    const url = `/books/${state.author.id}/books`
-    const header = state.author.name+'s Books'
+    const url = `/authors/${state.author.id}/books`
+    const header = state.author.name + 's Books'
 
     useLayoutEffect(() => {
         getBooks()
@@ -27,12 +27,18 @@ function Books() {
 
     //useEffect( () => {getBooks()}, [])
 
-   
+
 
     return (
         <div className="container mt-5">
             <h1 className="mb-4">{header}</h1>
             <AuthorBookTable books={books} />
+            <Link to={{
+                pathname: `/authors/${state.author.id}`,
+                state: { state: state }
+              }}>
+                <button className='btn btn-primary'>Back</button>
+            </Link>
         </div>
     );
 }
