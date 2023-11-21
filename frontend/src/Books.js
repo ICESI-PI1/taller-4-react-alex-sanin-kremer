@@ -9,19 +9,19 @@ const baseURL = 'http://localhost:8080/books'
 function Books() {
   
   const [books, setBooks] = React.useState([]);
-  const [bookEdit, setBookEdit] = React.useState({id:"", title:"", date:"", author:""});
+  const [bookEdit, setBookEdit] = React.useState({title:"", publicationDate:"", authorID:"",id:""});
 
   useLayoutEffect(() => {
     getBooks()
-    //delBook()
-    //addBook()
+    delBook()
+    addBook()
   }, []);
 
   const getBooks = async () => {
     try {
       const res = await axios.get('/books')
-      console.log("hola")
       setBooks(res.data)
+      console.log(books)
     }catch(e){
       console.log(e)
     }
@@ -32,7 +32,9 @@ function Books() {
   const addBook = async (book) => {
     //Try to edit if book already exists if not, add new book
           try{
-            const res = await axios.put("/books/"+book.id, book)
+            console.log(book)
+            const res = await axios.post("/books", book)
+            getBooks()
             if(res.status==200){
               getBooks()
             }else{
