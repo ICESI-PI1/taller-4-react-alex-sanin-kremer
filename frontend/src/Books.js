@@ -31,9 +31,6 @@ function Books() {
 
   const addBook = async (book) => {
     //Try to edit if book already exists if not, add new book
-   
-    
-
           try{
             const res = await axios.put("/books/"+book.id, book)
             if(res.status==200){
