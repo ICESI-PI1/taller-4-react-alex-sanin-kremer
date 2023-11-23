@@ -31,6 +31,7 @@ public class BookController {
     @GetMapping(value = "/{bookID}")
     public ResponseEntity getBookById(@PathVariable(value = "bookID") Long bookID) {
         try {
+            System.out.println("entra vista libro");
             return ResponseEntity.ok(bookService.getBookByID(bookID));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -43,7 +44,7 @@ public class BookController {
         return ResponseEntity.ok(bookService.createBook(bookToCreate));
     }
 
-    @PutMapping
+    @PutMapping(value = "/update")
     public ResponseEntity updateBook(@RequestBody Book bookToUpdate) {
         try {
             return ResponseEntity.ok(bookService.updateBook(bookToUpdate));
