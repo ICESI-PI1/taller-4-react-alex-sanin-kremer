@@ -18,7 +18,8 @@ function BookForm({addBook, bookEdit}) {
     const handleClick = ()=>{
         //e.preventDefault()
         console.log(bookEdit);
-        addBook({date,title, author})
+        const authorID = Math.floor(author);
+        addBook({date,title,authorID})
     }
 
     return (

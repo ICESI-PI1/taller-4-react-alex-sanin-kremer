@@ -13,8 +13,8 @@ function BookRow({book, delbook, editBook }) {
         >
           <TableCell align="right">{book.id}</TableCell>
           <TableCell align="left">{book.title}</TableCell>
-          <TableCell align="left">{book.date}</TableCell>
-          <TableCell align="left">{book.author}</TableCell>
+          <TableCell align="left">{book.publicationDate}</TableCell>
+          <TableCell align="left">{book.authorID}</TableCell>
           <TableCell align="left">
             <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>&nbsp;
             <Button variant="contained" color="success" onClick={()=>{editBook(book)}}>Edit</Button>
