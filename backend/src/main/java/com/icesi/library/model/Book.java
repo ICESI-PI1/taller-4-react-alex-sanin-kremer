@@ -22,10 +22,10 @@ public class Book {
     private Long ID;
     private String title;
     private Instant publicationDate;
-    //@ManyToOne
-    //@JoinColumn(name = "authorID", nullable = false)
-    //private Author author;
-    private Long authorID;
+    @ManyToOne
+    @JoinColumn(name = "authorID")
+    private Author author;
+    private Long authorID_1;
 
     @Override
     public String toString() {
@@ -33,7 +33,7 @@ public class Book {
                 "ID=" + ID +
                 ", title='" + title + '\'' +
                 ", publicationDate=" + publicationDate +
-                ", author=" + authorID +
+                ", author=" + authorID_1 +
                 '}';
     }
 }

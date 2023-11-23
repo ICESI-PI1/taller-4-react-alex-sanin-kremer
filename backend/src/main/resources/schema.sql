@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS USERS;
-DROP TABLE IF EXISTS AUTHORS CASCADE;
-DROP TABLE IF EXISTS BOOKS;
+DROP TABLE IF EXISTS AUTHOR CASCADE;
+DROP TABLE IF EXISTS BOOK;
 
 create table users(
                       id SERIAL PRIMARY KEY,
@@ -10,14 +10,14 @@ create table users(
 
 );
 
-create table authors(
+create table author(
                       id SERIAL PRIMARY KEY,
                       name varchar(100) not null,
                       nationality varchar(100) not null
 
 );
 
-create table books(
+create table book(
                         id SERIAL PRIMARY KEY,
                         title varchar(100) not null,
                         publication_date DATE not null,

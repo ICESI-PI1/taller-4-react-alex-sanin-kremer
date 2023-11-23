@@ -1,5 +1,7 @@
 package com.icesi.library.controller;
 
+import com.icesi.library.DTO.AuthorDTO;
+import com.icesi.library.DTO.MapperDTO;
 import com.icesi.library.model.Author;
 import com.icesi.library.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,8 @@ public class AuthorController {
     @GetMapping(value = "/{authorID}")
     public ResponseEntity getAuthorById(@PathVariable(value = "authorID") Long authorID) {
         try {
-            return ResponseEntity.ok(authorService.getAuthorByID(authorID));
+            AuthorDTO authorDTO = MapperDTO.authorToDTO(authorService.getAuthorByID(authorID));
+            return ResponseEntity.ok(authorDTO);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

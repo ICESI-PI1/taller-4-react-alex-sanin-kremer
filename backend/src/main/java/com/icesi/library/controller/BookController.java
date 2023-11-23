@@ -1,5 +1,7 @@
 package com.icesi.library.controller;
 
+import com.icesi.library.DTO.BookDTO;
+import com.icesi.library.DTO.MapperDTO;
 import com.icesi.library.model.Book;
 import com.icesi.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +33,8 @@ public class BookController {
     @GetMapping(value = "/{bookID}")
     public ResponseEntity getBookById(@PathVariable(value = "bookID") Long bookID) {
         try {
-            System.out.println("entra vista libro");
-            return ResponseEntity.ok(bookService.getBookByID(bookID));
+            BookDTO bookDTO = MapperDTO.bookToDTO(bookService.getBookByID(bookID));
+            return ResponseEntity.ok(bookDTO);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
